@@ -193,6 +193,21 @@ public class TemperatureSeriesAnalysisTest {
         double[] actualResult = seriesAnalysis.findTempsGreaterThen(0.5);
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
+    
+    @Test
+    public void testSummaryStatistics(){
+        TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
+
+        double averVal = 1.0;
+        double deviVal = 3.7416573867739413;
+        double minVal = -5.0;
+        double maxVal = 5.0;
+
+        assertEquals(averVal, statistics.getAvgTemp(), 0.00001);
+        assertEquals(deviVal, statistics.getDevTemp(), 0.00001);
+        assertEquals(minVal, statistics.getMinTemp(), 0.00001);
+        assertEquals(maxVal, statistics.getMaxTemp(), 0.00001);
+    }
 
     @Test
     public void testAddTempsWithOneElementArray(){

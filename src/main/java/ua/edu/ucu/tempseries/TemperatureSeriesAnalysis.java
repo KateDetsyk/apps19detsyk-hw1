@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
 
     private double[] temperatureSeries;
-    int arrSize;
+    private int arrSize;
 
     public TemperatureSeriesAnalysis() { }
 
@@ -30,12 +30,13 @@ public class TemperatureSeriesAnalysis {
         double sum = 0.0, deviation = 0.0;
         int len = temperatureSeries.length;
 
-        for(double elem : temperatureSeries) {
+        for (double elem : temperatureSeries) {
             sum += elem;
         }
         double mean = sum/len;
-        for(double elem: temperatureSeries) {
-            deviation += Math.pow(elem - mean, 2);
+        for (double elem: temperatureSeries) {
+            double x = elem - mean;
+            deviation += x*x;
         }
         return Math.sqrt(deviation/len);
     }
@@ -68,8 +69,8 @@ public class TemperatureSeriesAnalysis {
         error_generator();
 
         double value = Integer.MAX_VALUE, temp = temperatureSeries[0];
-        for(double elem : temperatureSeries){
-            if (Math.abs(0 - elem) < value){
+        for (double elem : temperatureSeries) {
+            if (Math.abs(0 - elem) < value) {
                 value = Math.abs(0 - elem);
                 temp = elem;
             }
@@ -81,8 +82,8 @@ public class TemperatureSeriesAnalysis {
         error_generator();
 
         double value = Integer.MAX_VALUE, temp = temperatureSeries[0];
-        for(double elem : temperatureSeries){
-            if (Math.abs(tempValue - elem) < value){
+        for (double elem : temperatureSeries) {
+            if (Math.abs(tempValue - elem) < value) {
                 value = Math.abs(0 - elem);
                 temp = elem;
             }
@@ -95,14 +96,14 @@ public class TemperatureSeriesAnalysis {
         double[] helperarr = new double[temperatureSeries.length];
         double[] arr = {};
         int index = 0;
-        for(double elem : temperatureSeries){
-            if (elem < tempValue){
+        for (double elem : temperatureSeries) {
+            if (elem < tempValue) {
                 arr = new double[index+1];
                 helperarr[index] = elem;
                 index++;
             }
         }
-        for (int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = helperarr[i];
         }
         return arr;
@@ -113,14 +114,14 @@ public class TemperatureSeriesAnalysis {
         double[] helperarr = new double[temperatureSeries.length];
         double[] arr = {};
         int index = 0;
-        for(double elem : temperatureSeries){
-            if (elem > tempValue){
+        for (double elem : temperatureSeries) {
+            if (elem > tempValue) {
                 arr = new double[index+1];
                 helperarr[index] = elem;
                 index++;
             }
         }
-        for (int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = helperarr[i];
         }
         return arr;
@@ -146,7 +147,7 @@ public class TemperatureSeriesAnalysis {
             arrSize += 1;
         }
 
-        for (int i=0; i < arrSize; i++){
+        for (int i=0; i < arrSize; i++) {
             sum += temperatureSeries[i];
         }
         return sum;
@@ -165,14 +166,15 @@ public class TemperatureSeriesAnalysis {
     }
 
     public void error_generator(){
-        if (temperatureSeries.length == 0){
+        if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException();
         }
     }
 
     public void check_temperature_list(double[] arr){
+        double min_temp = -273.0;
         for (double elem: arr) {
-            if (elem < -273){
+            if (elem < min_temp) {
                 throw new InputMismatchException();
             }
         }
