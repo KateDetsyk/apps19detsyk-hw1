@@ -129,9 +129,9 @@ public class TemperatureSeriesAnalysis {
 
     public TempSummaryStatistics summaryStatistics() {
         errorGenerator();
-        final TempSummaryStatistics summaryStatistics = new TempSummaryStatistics(average(),
-                deviation(), min(), max());
-        return summaryStatistics;
+        final TempSummaryStatistics ST =
+                new TempSummaryStatistics(average(), deviation(), min(), max());
+        return ST;
     }
 
     public double addTemps(double... temps) {
@@ -173,10 +173,10 @@ public class TemperatureSeriesAnalysis {
     }
 
     public void checkTemperatureList(double[] arr) {
-        final double minTemp = -273.0;
+        final double MINTEMP = -273.0;
 
         for (double elem: arr) {
-            if (elem < minTemp) {
+            if (elem < MINTEMP) {
                 throw new InputMismatchException();
             }
         }
