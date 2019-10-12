@@ -193,7 +193,7 @@ public class TemperatureSeriesAnalysisTest {
         double[] actualResult = seriesAnalysis.findTempsGreaterThen(0.5);
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
-    
+
     @Test
     public void testSummaryStatistics(){
         TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();

@@ -15,7 +15,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double average() {
-        error_generator();
+        errorGenerator();
 
         double sum = 0.0;
         for (double elem : temperatureSeries) {
@@ -25,7 +25,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double deviation() {
-        error_generator();
+        errorGenerator();
 
         double sum = 0.0, deviation = 0.0;
         int len = temperatureSeries.length;
@@ -42,7 +42,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        error_generator();
+        errorGenerator();
 
         double min = Integer.MAX_VALUE;
         for (double temperatureSery : temperatureSeries) {
@@ -54,7 +54,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double max() {
-        error_generator();
+        errorGenerator();
 
         double max = Integer.MIN_VALUE;
         for (double temperatureSery : temperatureSeries) {
@@ -66,7 +66,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToZero() {
-        error_generator();
+        errorGenerator();
 
         double value = Integer.MAX_VALUE, temp = temperatureSeries[0];
         for (double elem : temperatureSeries) {
@@ -79,7 +79,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        error_generator();
+        errorGenerator();
 
         double value = Integer.MAX_VALUE, temp = temperatureSeries[0];
         for (double elem : temperatureSeries) {
@@ -92,7 +92,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsLessThen(double tempValue) {
-        error_generator();
+        errorGenerator();
         double[] helperarr = new double[temperatureSeries.length];
         double[] arr = {};
         int index = 0;
@@ -110,7 +110,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
-        error_generator();
+        errorGenerator();
         double[] helperarr = new double[temperatureSeries.length];
         double[] arr = {};
         int index = 0;
@@ -128,14 +128,15 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        error_generator();
-        final TempSummaryStatistics st = new TempSummaryStatistics(average(), deviation(), min(), max());
-        return st;
+        errorGenerator();
+        final TempSummaryStatistics summaryStatistics = new TempSummaryStatistics(average(),
+                deviation(), min(), max());
+        return summaryStatistics;
     }
 
     public double addTemps(double... temps) {
-        check_temperature_list(temps);
-        error_generator();
+        checkTemperatureList(temps);
+        errorGenerator();
 
         double sum = 0;
 
@@ -147,13 +148,13 @@ public class TemperatureSeriesAnalysis {
             arrSize += 1;
         }
 
-        for (int i=0; i < arrSize; i++) {
+        for (int i = 0; i < arrSize; i++) {
             sum += temperatureSeries[i];
         }
         return sum;
     }
 
-    public void resize(){
+    public void resize() {
         int newLen = temperatureSeries.length * 2;
         double[] temp = temperatureSeries;
         this.temperatureSeries = new double[newLen];
@@ -165,16 +166,17 @@ public class TemperatureSeriesAnalysis {
         }
     }
 
-    public void error_generator(){
+    public void errorGenerator() {
         if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException();
         }
     }
 
-    public void check_temperature_list(double[] arr){
-        double min_temp = -273.0;
+    public void checkTemperatureList(double[] arr) {
+        final double minTemp = -273.0;
+
         for (double elem: arr) {
-            if (elem < min_temp) {
+            if (elem < minTemp) {
                 throw new InputMismatchException();
             }
         }
