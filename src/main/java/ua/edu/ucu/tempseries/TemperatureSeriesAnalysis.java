@@ -9,8 +9,8 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis() { }
 
-    public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        this.temperatureSeries = temperatureSeries;
+    public TemperatureSeriesAnalysis(double[] tempSeries) {
+        this.temperatureSeries = tempSeries;
         this.arrSize = temperatureSeries.length;
     }
 
